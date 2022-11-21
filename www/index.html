@@ -4,13 +4,35 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>EntornoCliente</title>
+  <link rel="stylesheet" href="style/styleHome.css">
 </head>
 <body>
-  <main>
+  <div id="ventana">
+    Ventana
+    <div class="tituloBotones">
+      <p>Pass saver</p>
+      <p>Botones de cerrar</p>
+    </div>
+    <div class="categoriaSite">
+     <p class="btCategoria">Add Categorie</p>
+     <button class="btSite">Add Site</button>
+    </div>
+    <div class="menuCategorias">
+      menu izq. categorias
+    </div>
+    <div class="tablasInformacion">
+      tabla con categorias + sites + user + password
+    </div>
+    <div class="popupNuevaCategoria">
+      PopUp alerta | Insertar nueva categoria
+    </div>
+  </div>
+  
+  <!-- <main>
     <ul></ul>
-  </main>
-  <script>
+  </main> -->
+  <!-- <script>
     let drawData = (data) => {
       data.forEach(category => {
         let parent = document.getElementsByTagName('ul')[0]
@@ -24,6 +46,6 @@
     fetch("http://localhost:3000/categories")
       .then(res => res.json())
       .then(data => drawData(data))
-  </script>
+  </script> -->
 </body>
 </html>
