@@ -1,47 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="PassSaver" content="Pass Saver page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="PassSaver" content="Pass Saver page" />
     <title>PassSaver</title>
-</head>
-<body>
-    <header>
-        <div class="pageName">
-            <h1>PassSaver</h1>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles/passSaverStyle.css" />
+  </head>
+  <body>
+    <div class="container mt-5 border border-dark p-5">
+      <header class="mb-5 d-flex justify-content-between w-100">
+        <h1>PassSaver</h1>
+
+        <button
+          type="button"
+          class="btn-close align-self-center"
+          aria-label="Close"
+        ></button>
+      </header>
+      <form>
+        <div class="row mb-3">
+          <label for="inputURL3" class="col-sm-2 col-form-label">URL</label>
+          <div class="col-sm-10">
+            <input
+              type="URL"
+              class="form-control"
+              id="inputURL3"
+              placeholder="https://www.yourweb.com"
+            />
+          </div>
         </div>
-        <div class="headerOptions">
-            <imput type="button" class="ButtonClose" value="Close">Close</imput>
+        <div class="row mb-3">
+          <label for="inputUser3" class="col-sm-2 col-form-label">User</label>
+          <div class="col-sm-10">
+            <input
+              type="User"
+              class="form-control"
+              id="inputUser3"
+              placeholder="yourname@mail.com"
+            />
+          </div>
         </div>
-    </header>
-    <content>
-        <div class="imputs">
-            <form class="urlLabel">
-                <label>Url</label>
-                <input type="text" id="Url" name="Url">
-            </form>
-            <form class="userLabel">
-                <label>User</label>
-                <input type="text" id="user" name="user">
-            </form>
-            <div class="passwordDiv">
-                <form class="passwordLabel">
-                    <label>Password</label>
-                    <input type="text" id="password" name="password">
-                </form>
-                <imput type="button" class="generateButton" value="Generate"> Generate</imput>
+        <div class="row mb-3">
+          <label for="inputPassword3" class="col-sm-2 col-form-label"
+            >Password</label
+          >
+          <div class="col-sm-8">
+            <input type="password" class="form-control" id="inputPassword3" />
+          </div>
+          <div class="col d-flex justify-content-end">
+            <button type="button" class="btn btn-primary">
+              <?xml version="1.0" encoding="UTF-8"?><svg
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                color="#ffffff"
+              >
+                <path
+                  d="M14 21H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v9"
+                  stroke="#ffffff"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                ></path>
+                <path
+                  d="M2 7h20M5 5.01l.01-.011M8 5.01l.01-.011M11 5.01l.01-.011M19.5 16v6m0 0L17 19.5m2.5 2.5l2.5-2.5"
+                  stroke="#ffffff"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label" for="floatingTextarea2"
+            >Comments</label
+          >
+          <div class="col-sm-10">
+            <textarea
+              class="form-control"
+              placeholder="Leave a comment here"
+              id="floatingTextarea2"
+              style="height: 100px"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-10 offset-sm-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck1" />
+              <label class="form-check-label" for="gridCheck1">
+                Example checkbox
+              </label>
             </div>
-            <form class="descriptionLabel">
-                <label>Description</label>
-                <br>
-                <input type="text" id="description" name="description">
-            </form>
+          </div>
         </div>
-        <div class="submits">
-            <input type="button" class="cancelButton" value="Cancel">
-            <input type="submit" class="saveButton" value="Save">
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-danger me-4">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
         </div>
-    </content>
-</body>
+      </form>
+    </div>
+  </body>
 </html>
