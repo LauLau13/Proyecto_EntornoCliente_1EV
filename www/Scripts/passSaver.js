@@ -27,24 +27,50 @@ function hidePassword() {
 
 function onCheckForm() {
   /* validate email input has an email */
-  let alert =
-    "Todos los campos son obligatorios, por favor rellena todos los campos.";
   let user = document.getElementById("inputUser").value;
   if (user == "") {
-    console.log(alert);
+    return false;
   }
 
   /* validate password input has a password */
   let password = document.getElementById("inputPassword").value;
   if (password == "") {
-    console.log(alert);
+    return false;
   }
 
   /* validate url has an url */
   let url = document.getElementById("inputURL").value;
   if (url == "") {
-    console.log(alert);
+    return false;
   }
+  return true;
 }
 
-function onsubmit() {}
+async function onSubmit() {
+  if (!onCheckForm()) {
+    alert(
+      "Todos los campos son obligatorios, por favor rellena todos los campos."
+    );
+    return;
+  }
+  let name = document.getElementById("inputName").value;
+  let user = document.getElementById("inputUser").value;
+  let password = document.getElementById("inputPassword").value;
+  let url = document.getElementById("inputURL").value;
+  let description = document.getElementById("inputDescription").value;
+
+  let id = localStorage.getItem("id") || 1;
+  const options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    mode: "no-cors",
+    method: "POST",
+    body: `{"name":${name},"url": ${url},"user":${user},"password":${password},"description":${description}}`,
+  };
+
+  fetch("http://localhost:3000/categories/1", options)
+    .then((response) => response.json())
+    .then((response) => console.log(response))
+    .catch((err) => console.error(err))
+}
