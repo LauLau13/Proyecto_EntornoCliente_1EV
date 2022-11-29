@@ -15,7 +15,7 @@ fetch("http://localhost:3000/categories")
   .then((response) => response.json())
   .then((dataCategories) => drawDataCategories(dataCategories));
 
-  
+
 //Visualizar todos los sites
 let drawDataSites = (dataSites) => {
   dataSites.forEach((site) => {
@@ -37,7 +37,10 @@ let drawDataSites = (dataSites) => {
     //Crea la 3aColumna con la fecha del site //To-Do
     let childColumn3 = document.createElement("td");
     childColumn3.type = "td";
-    childColumn3.innerText = "-";
+    //Variable que almacena la fecha completa
+    let completeDate = site.createdAt;
+    let normalDate = completeDate.slice(0,10);
+    childColumn3.innerText = normalDate;
     childRow.appendChild(childColumn3);
     //Crea la columna de botones de opciones del site
     let childColumn4 = document.createElement("td");
@@ -63,12 +66,23 @@ let drawDataSites = (dataSites) => {
   
 fetch("http://localhost:3000/sites")
   .then((res) => res.json())
-  .then((dataSites) => drawData(dataSites));
+  .then((dataSites) => drawDataSites(dataSites));
+
+
+
+
+//Función que visualiza los sites de una categoría
+function VisualizeCategorySites()
+{
+  let categoryName = document.getElementById("categoriesList.button");
+  
+}
 
 
 
 //Función que añade una categoría
-function AddCategory() {
+function AddCategory() 
+{
   //Crear modalCategoria
   document.getElementById("modalCategoria").style.display = block;
   /*
@@ -80,6 +94,7 @@ function AddCategory() {
    */
 }
 
-function DeleteCategory() {
+function DeleteCategory() 
+{
   //Onclick botón X categoría
 }
