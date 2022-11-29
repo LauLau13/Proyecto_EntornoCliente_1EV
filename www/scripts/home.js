@@ -1,13 +1,43 @@
 //Visualizar todas las categorías
 let drawDataCategories = (dataCategories) => {
   dataCategories.forEach((category) => {
-    let parent = document.getElementById("categoriesList");
-    let child = document.createElement("button");
-    child.type = "button";
-    child.classList = "list-group-item list-group-item-action";
-    //child.innerText = JSON.stringify(category) //Esto el JSON entero
-    child.innerText = category.name;
-    parent.appendChild(child);
+    let parent = document.getElementById("categoriesTable");
+    //Crea la fila de la categoria
+    let childRow = document.createElement("tr");
+    childRow.type = "tr";
+    parent.appendChild(childRow);
+    //Crea la 1aColumna para el nombre de la categoria
+    let childColumn1 = document.createElement("td");
+    childColumn1.type = "td";
+    childRow.appendChild(childColumn1);
+    //Crea el botón del nombre de la categoria en la 1aColumna
+    let childC1BtnCategory = document.createElement("button");
+    childC1BtnCategory.type = "button";
+    childC1BtnCategory.classList = "list-group-item list-group-item-action";
+    childC1BtnCategory.innerText = category.name;
+    childColumn1.appendChild(childC1BtnCategory);
+    
+    //Crea la 2aColumna para el botón de borrar de la categoria
+    let childColumn2 = document.createElement("td");
+    childColumn2.type = "td";
+    childRow.appendChild(childColumn2);
+    //Crea el botón de eliminar la categoria en la 2aColumna
+    let childC2BtnDeleteC = document.createElement("button");
+    childC2BtnDeleteC.type = "button";
+    childC1BtnCategory.classList = "btn-outline-light";
+    childColumn2.appendChild(childC2BtnDeleteC);
+    //Crea un svg del botón
+    let BtnDeleteCSvg = document.createElement("svg");
+    BtnDeleteCSvg.type = "svg";
+    /* BtnDeleteCSvg.classList = ""width="24px"; height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000">"; */
+    childC2BtnDeleteC.appendChild(BtnDeleteCSvg);
+    //Asocia un path al svg
+    let BtnDeleteCPath = document.createElement("path");
+    BtnDeleteCPath.type = "path";
+    /* BtnDeleteCSvg.classList = ""<path d="M9.172 14.828L12.001 12m2.828-2.828L12.001 12m0 0L9.172 9.172M12.001 12l2.828 2.828M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>"" */
+    BtnDeleteCSvg.appendChild(BtnDeleteCPath);
+
+
   })
 };
 
@@ -20,7 +50,7 @@ fetch("http://localhost:3000/categories")
 let drawDataSites = (dataSites) => {
   dataSites.forEach((site) => {
     let parent = document.getElementById("sitesTable");
-    //Crea la la fila del site
+    //Crea la fila del site
     let childRow = document.createElement("tr");
     childRow.type = "tr";
     parent.appendChild(childRow);
@@ -98,9 +128,10 @@ function DeleteCategory()
 {
   //Onclick botón X categoría
 }
-const myModal = document.getElementById('exampleModal')
+
+/* const myModal = document.getElementById('exampleModal')
 const myInput = document.getElementById('myInput')
 
 myModal.addEventListener('shown.bs.modal', () => {
   myInput.focus()
-})
+}) */
