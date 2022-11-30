@@ -21,6 +21,7 @@ let drawDataCategories = (dataCategories) => {
     childC1BtnCategory.type = "button";
     childC1BtnCategory.classList = "list-group-item list-group-item-action";
     childC1BtnCategory.innerText = category.name;
+    childC1BtnCategory.onclick = VisualizeCategorySites(category.id);
     childColumn1.appendChild(childC1BtnCategory);
 
     //Crea la 2aColumna para el botón de borrar de la categoria
@@ -88,7 +89,6 @@ let drawDataSites = (dataSites) => {
     childC4BtnAdd.classList = "btn-outline-light border-0 bg-white";
     childC4BtnAdd.innerHTML = btnAdd;
     childColumn4.appendChild(childC4BtnAdd);
-
   })
 };
   
@@ -100,9 +100,10 @@ fetch("http://localhost:3000/sites")
 
 
 //Función que visualiza los sites de una categoría
-function VisualizeCategorySites()
+function VisualizeCategorySites(categoryId)
 {
-  let categoryName = document.getElementById("categoriesList.button");
+  let CategoryId = categoryId;
+  
   
 }
 
