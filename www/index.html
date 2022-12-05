@@ -18,7 +18,6 @@
     ></script>
     <link rel="stylesheet" href="styles/passSaverStyle.css" />
     <script src="./Scripts/passSaver.js"></script>
-    <script src="./Scripts/home.js"></script>
     <script src="./scripts/home.js"></script>
   </head>
   <body>
@@ -47,7 +46,7 @@
           type="button"
           class="btn btn-outline-secondary"
           data-bs-toggle="modal"
-          data-bs-target="passSaverModal"
+          data-bs-target="#passSaverModal"
         >
           Add site
         </button>
@@ -291,24 +290,5 @@
         </div>
       </div>
     </div>
-
-    <!-- <main>
-    <ul></ul>
-  </main> -->
-    <!-- <script>
-    let drawData = (data) => {
-      data.forEach(category => {
-        let parent = document.getElementsByTagName('ul')[0]
-        let child = document.createElement('li')
-        // child.innerText = JSON.stringify(category)
-        child.innerText = category.name
-        parent.appendChild(child)
-      })
-    }
-
-    fetch("http://localhost:3000/categories")
-      .then(res => res.json())
-      .then(data => drawData(data))
-  </script> -->
   </body>
 </html>

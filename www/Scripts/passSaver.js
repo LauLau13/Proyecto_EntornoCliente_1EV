@@ -46,7 +46,7 @@ function onCheckForm() {
   return true;
 }
 
-async function onSubmit() {
+function onSubmit() {
   if (!onCheckForm()) {
     alert(
       "Todos los campos son obligatorios, por favor rellena todos los campos."
@@ -58,7 +58,7 @@ async function onSubmit() {
   let password = document.getElementById("inputPassword").value;
   let url = document.getElementById("inputURL").value;
   let description = document.getElementById("inputDescription").value;
-
+  debugger;
   let id = localStorage.getItem("id") || 1;
   const options = {
     headers: {
@@ -66,11 +66,11 @@ async function onSubmit() {
     },
     mode: "no-cors",
     method: "POST",
-    body: `{"name":${name},"url": ${url},"user":${user},"password":${password},"description":${description}}`,
+    body: `{"name":"${name}","url": "${url}","user":"${user}","password":"${password}","description":"${description}"}`,
   };
 
   fetch("http://localhost:3000/categories/1", options)
     .then((response) => response.json())
     .then((response) => console.log(response))
-    .catch((err) => console.error(err))
+    .catch((err) => console.error(err));
 }
