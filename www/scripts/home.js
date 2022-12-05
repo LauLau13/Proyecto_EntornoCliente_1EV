@@ -6,6 +6,15 @@ const btnDelete =
 const btnAdd =
   '<svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M20 12V5.749a.6.6 0 00-.176-.425l-3.148-3.148A.6.6 0 0016.252 2H4.6a.6.6 0 00-.6.6v18.8a.6.6 0 00.6.6H11M8 10h8M8 6h4m-4 8h3M17.954 16.94l1-1a1.121 1.121 0 011.586 0v0a1.121 1.121 0 010 1.585l-1 1m-1.586-1.586l-2.991 2.991a1 1 0 00-.28.553l-.244 1.557 1.557-.243a1 1 0 00.553-.28l2.99-2.992m-1.585-1.586l1.586 1.586" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16 2v3.4a.6.6 0 00.6.6H20" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
 
+window.onload = () => {
+  fetch("http://localhost:3000/categories")
+    .then((response) => response.json())
+    .then((dataCategories) => drawDataCategories(dataCategories));
+
+  fetch("http://localhost:3000/sites")
+    .then((res) => res.json())
+    .then((dataSites) => drawDataSites(dataSites));
+};
 //Visualizar todas las categorías
 let drawDataCategories = (dataCategories) => {
   dataCategories.forEach((category) => {
@@ -24,7 +33,9 @@ let drawDataCategories = (dataCategories) => {
     childC1BtnCategory.type = "button";
     childC1BtnCategory.classList = "list-group-item list-group-item-action";
     childC1BtnCategory.innerText = category.name;
-    childC1BtnCategory.onclick = VisualizeCategorySites(category.id);
+    childC1BtnCategory.onclick = () => {
+      visualizeCategorySites(category.id);
+    };
     childColumn1.appendChild(childC1BtnCategory);
 
     //Crea la 2aColumna para el botón de borrar de la categoria
@@ -99,13 +110,18 @@ let drawDataSites = (dataSites) => {
   });
 };
 
-fetch("http://localhost:3000/sites")
-  .then((res) => res.json())
-  .then((dataSites) => drawDataSites(dataSites));
-
 //Función que visualiza los sites de una categoría
-function VisualizeCategorySites(categoryId) {
-  let CategoryId = categoryId;
+function visualizeCategorySites(categoryId) {
+  let parent = document.getElementById("sitesTable");
+
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+
+  fetch(`http://localhost:3000/categories/${categoryId}`)
+    .then((response) => response.json())
+    .then((response) => drawDataSites(response))
+    .catch((err) => console.error(err));
 }
 
 //Función que añade una categoría
@@ -134,10 +150,3 @@ function DeleteCategory(categoryId) {
    *  3.3 - cerrar el modal
    */
 }
-
-/* const myModal = document.getElementById('exampleModal')
-const myInput = document.getElementById('myInput')
-
-myModal.addEventListener('shown.bs.modal', () => {
-  myInput.focus()
-}) */
