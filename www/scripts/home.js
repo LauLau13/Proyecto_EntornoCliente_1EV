@@ -131,3 +131,4 @@ function AddCategory() {
 function DeleteCategory() {
   //Onclick botón X categoría
 }
+
