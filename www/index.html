@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="styles/passSaverStyle.css" />
     <script src="./Scripts/passSaver.js"></script>
     <script src="./Scripts/home.js"></script>
+    <script src="./scripts/home.js"></script>
   </head>
   <body>
     <div class="Page1 container border border-dark-3 mt-4 p-0 w-auto h-auto">
@@ -32,14 +33,21 @@
       <hr class="border border-1 p-0 m-1" />
       <!-- Opciones Add Categoria | Site -->
       <div class="btn-group m-2 mt-2 mb-0">
-        <button type="button" class="btn btn-outline-primary">
+        <button
+          type="button"
+          id="myInput"
+          class="btn btn-outline-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          onclick="AddCategory()"
+        >
           Add category
         </button>
         <button
           type="button"
           class="btn btn-outline-secondary"
           data-bs-toggle="modal"
-          href="#exampleModal"
+          data-bs-target="passSaverModal"
         >
           Add site
         </button>
@@ -56,18 +64,8 @@
             Categories
           </p>
           <hr class="border border-1 border-dark p-0 m-0" />
-          <table class="table d-block">
-            <a href="" class="text-decoration-none"
-              ><span
-                class="d-block p-1 text-secondary pb-0 text-decoration-none"
-                >Redes Sociales</span
-              ></a
-            >
-            <a href="" class="text-decoration-none"
-              ><span class="d-block p-1 text-secondary pb-0"
-                >Supermercados</span
-              ></a
-            >
+          <table class="table d-block" id="categoriesTable">
+            <!-- En esta tabla aparecerá el listado de categorias -->
           </table>
         </div>
         <!--Tabla-->
@@ -85,60 +83,56 @@
                 <th scope="col">Actions</th>
               </tr>
             </thead>
-            <tbody class="tbody table table-white">
-              <tr>
-                <td>Google</td>
-                <td>MySample</td>
-                <td>07/03/2022</td>
-                <td>
-                  <button class="p-1">Open</button>
-                  <button class="p-1">X</button>
-                  <button class="p-1">Add</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Facebook</td>
-                <td>MySample</td>
-                <td>13/10/2022</td>
-                <td>
-                  <button class="p-1">Open</button>
-                  <button class="p-1">X</button>
-                  <button class="p-1">Add</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Instagram</td>
-                <td>MySample</td>
-                <td>20/05/2022</td>
-                <td>
-                  <button class="p-1">Open</button>
-                  <button class="p-1">X</button>
-                  <button class="p-1">Add</button>
-                </td>
-              </tr>
-              <tr>
-                <td>TikTok</td>
-                <td>MySample</td>
-                <td>10/10/2022</td>
-                <td>
-                  <button class="p-1">Open</button>
-                  <button class="p-1">X</button>
-                  <button class="p-1">Add</button>
-                </td>
-              </tr>
+            <tbody class="table table-white" id="sitesTable">
+              <!--En estatabla aparecerá el listado de sites-->
             </tbody>
           </table>
         </div>
       </div>
-      <div class="popupNuevaCategoria">
-        PopUp alerta | Insertar nueva categoria
+      <!--Modal | PopUp Nueva categoria-->
+      <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Nueva categoría</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>Nombre</p>
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nuevo nombre"
+                  aria-label="Nuevo nombre"
+                  aria-describedby="basic-addon1"
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- bootstrap modal xl -->
+    <!-- Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="passSaverModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -283,7 +277,11 @@
                   <button class="btn btn-danger me-4" data-bs-dismiss="modal">
                     Cancel
                   </button>
-                  <button class="btn btn-primary" id="submitBtn" onclick="onSubmit()">
+                  <button
+                    class="btn btn-primary"
+                    id="submitBtn"
+                    onclick="onSubmit()"
+                  >
                     Save
                   </button>
                 </div>
