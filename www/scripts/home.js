@@ -48,7 +48,7 @@ let drawDataCategories = (dataCategories) => {
     childC2BtnDeleteC.classList = "btn-outline-light border-0 bg-white";
     childC2BtnDeleteC.innerHTML = btnDelete;
     childC2BtnDeleteC.setAttribute('data-bs-toggle', 'modal')
-    childC2BtnDeleteC.setAttribute('data-bs-target', 'DeleteCategoryModal')
+    childC2BtnDeleteC.setAttribute('data-bs-target', '#DeleteCategoryModal')
     childC2BtnDeleteC.onclick = () => {
       DeleteCategory(category.id);
     };
@@ -101,6 +101,9 @@ let drawDataSites = (dataSites) => {
     childC4BtnClose.type = "button";
     childC4BtnClose.classList = "btn-outline-light border-0 bg-white";
     childC4BtnClose.innerHTML = btnDelete;
+    childC4BtnClose.setAttribute('data-bs-toggle', 'modal');
+    childC4BtnClose.setAttribute('data-bs-target', '#DeleteSiteModal');
+    childC4BtnClose.onclick = () => StorageSiteId(site.id); //Almacena el Id del site al clickarlo
     childColumn4.appendChild(childC4BtnClose);
     let childC4BtnAdd = document.createElement("button");
     childC4BtnAdd.type = "button";
@@ -137,12 +140,33 @@ function AddCategory() {
    */
 }
 
+function StorageSiteId(siteId){
+  localStorage.setItem("id",siteId);
+}
+
+function DeleteSite(){
+  //1- Recoger el Id del site
+  let id = localStorage.getItem("id")
+
+  //2- Llamada a la API para eliminar el site
+   const options = {method: 'DELETE'};
+
+   fetch(`http://localhost:3000/sites/${id}`, options)
+     .then(response => response.json())
+     .then(response => console.log(response))
+     .catch(err => console.error(err));
+
+  //Cerrar el modal
+  document.getElementById("DeleteSiteModal").style.display = none; //No funciona
+}
+
 function DeleteCategory(categoryId) {
- // document.getElementById("DeleteCategoryModal").style.display = block;
+  /**1- visualizar un modal de si desea eliminar una categoría
+    *  1.1 en el modal debe de aparecer el nombre de la categoría a borrar
+    *  1.2 en el modal debe de aparecer un botón de eliminar o cancelar
+    */
+  document.getElementById("DeleteCategoryModal").style.display = block;
   /**
-   * 1- visualizar un modal de si desea eliminar una categoría
-   *  1.1 en el modal debe de aparecer el nombre de la categoría a borrar
-   *  1.2 en el modal debe de aparecer un botón de eliminar o cancelar
    * 2- al darle a cancelar se cerrará el modal
    * 3- al darle a eliminar:
    *  3.1- eliminar los sites de la categoría
@@ -150,3 +174,5 @@ function DeleteCategory(categoryId) {
    *  3.3 - cerrar el modal
    */
 }
+
+
