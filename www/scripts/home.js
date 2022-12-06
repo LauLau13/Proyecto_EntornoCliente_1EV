@@ -150,7 +150,7 @@ function DeleteCategory() {
 
   fetch(`http://localhost:3000/categories/${id}`, option1)
     .then((response) => response.json())
-    .then((response) => console.log(response).forEach((site) => {
+    .then((response) => (response).forEach((site) => {
       StorageSiteId(site.id);
       DeleteSite();
       })
