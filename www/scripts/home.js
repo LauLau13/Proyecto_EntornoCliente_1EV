@@ -49,9 +49,7 @@ let drawDataCategories = (dataCategories) => {
     childC2BtnDeleteC.innerHTML = btnDelete;
     childC2BtnDeleteC.setAttribute('data-bs-toggle', 'modal')
     childC2BtnDeleteC.setAttribute('data-bs-target', '#DeleteCategoryModal')
-    childC2BtnDeleteC.onclick = () => {
-      DeleteCategory(category.id);
-    };
+    childC2BtnDeleteC.onclick = () => StorageCategoryId(category.id); 
     childColumn2.appendChild(childC2BtnDeleteC);
   });
 };
@@ -127,8 +125,9 @@ function visualizeCategorySites(categoryId) {
     .catch((err) => console.error(err));
 }
 
+//ELIMINAR ESTE COMENTARIO, NO SIRVE
 //Función que añade una categoría
-function AddCategory() {
+/* function AddCategory() {
   //Crear modalCategoria
   document.getElementById("modalCategoria").style.display = block;
   /*
@@ -138,15 +137,16 @@ function AddCategory() {
    *Ok añadir datos y cerrar el modal.
    *Cancel cerrar el modal.
    */
-}
+  //HASTA AQUÍ
+
 
 function StorageSiteId(siteId){
-  localStorage.setItem("id",siteId);
+  localStorage.setItem("idS",siteId);
 }
 
 function DeleteSite(){
   //1- Recoger el Id del site
-  let id = localStorage.getItem("id")
+  let id = localStorage.getItem("idS")
 
   //2- Llamada a la API para eliminar el site
    const options = {method: 'DELETE'};
@@ -155,24 +155,40 @@ function DeleteSite(){
      .then(response => response.json())
      .then(response => console.log(response))
      .catch(err => console.error(err));
-
-  //Cerrar el modal
-  document.getElementById("DeleteSiteModal").style.display = none; //No funciona
+  
+  //Visualizar los sites actualizados
+  /* location.reload(); */
 }
 
-function DeleteCategory(categoryId) {
-  /**1- visualizar un modal de si desea eliminar una categoría
-    *  1.1 en el modal debe de aparecer el nombre de la categoría a borrar
-    *  1.2 en el modal debe de aparecer un botón de eliminar o cancelar
-    */
-  document.getElementById("DeleteCategoryModal").style.display = block;
-  /**
-   * 2- al darle a cancelar se cerrará el modal
-   * 3- al darle a eliminar:
-   *  3.1- eliminar los sites de la categoría
-   *  3.2 - eliminar la categoría
-   *  3.3 - cerrar el modal
-   */
+function StorageCategoryId(categoryId){
+  localStorage.setItem("idC", categoryId);
 }
 
+function DeleteCategory() {
+  //1- Recoger el Id del site
+  let id = localStorage.getItem("idC")
 
+  //2- Borrar los sites de la category
+  const option1 = {method: 'GET'};
+
+  fetch(`http://localhost:3000/categories/${id}`, option1)
+    .then((response) => response.json())
+    .then((response) => console.log(response).forEach((site) => {
+      StorageSiteId(site.id);
+      DeleteSite();
+      })
+    )
+    .catch(err => console.error(err));
+    
+
+  //3- Llamada a la API para eliminar la categoría
+  const option2 = {method: 'DELETE'};
+
+  fetch(`http://localhost:3000/categories/${id}`, option2)
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
+  
+  //Visualizar los sites actualizados
+  location.reload();
+}
