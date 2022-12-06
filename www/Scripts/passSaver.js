@@ -46,7 +46,7 @@ function onCheckForm() {
   return true;
 }
 
-function onSubmit() {
+async function onSubmit() {
   if (!onCheckForm()) {
     alert(
       "Todos los campos son obligatorios, por favor rellena todos los campos."
@@ -57,20 +57,32 @@ function onSubmit() {
   let user = document.getElementById("inputUser").value;
   let password = document.getElementById("inputPassword").value;
   let url = document.getElementById("inputURL").value;
-  let description = document.getElementById("inputDescription").value;
-  debugger;
+  let description = document.getElementById("inputDescription").value || "";
   let id = localStorage.getItem("id") || 1;
+  const body = {
+    name: name,
+    url: url,
+    user: user,
+    password: password,
+    description: description,
+  };
   const options = {
     headers: {
       "Content-Type": "application/json",
     },
     mode: "no-cors",
     method: "POST",
-    body: `{"name":"${name}","url": "${url}","user":"${user}","password":"${password}","description":"${description}"}`,
+    body: JSON.stringify(body),
   };
 
-  fetch("http://localhost:3000/categories/1", options)
-    .then((response) => response.json())
+  fetch(`http://localhost:3000/categories/${id}`, options)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Something went wrong");
+      }
+    })
     .then((response) => console.log(response))
     .catch((err) => console.error(err));
 }
