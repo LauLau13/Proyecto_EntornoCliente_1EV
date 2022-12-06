@@ -49,7 +49,7 @@ let drawDataCategories = (dataCategories) => {
     childC2BtnDeleteC.innerHTML = btnDelete;
     childC2BtnDeleteC.setAttribute('data-bs-toggle', 'modal')
     childC2BtnDeleteC.setAttribute('data-bs-target', '#DeleteCategoryModal')
-    childC2BtnDeleteC.onclick = () => StorageCategoryId(category.id); 
+    childC2BtnDeleteC.onclick = () => localStorage.setItem("idC",category.id); //Almacena el Id de la category al clickarlo
     childColumn2.appendChild(childC2BtnDeleteC);
   });
 };
@@ -101,7 +101,7 @@ let drawDataSites = (dataSites) => {
     childC4BtnClose.innerHTML = btnDelete;
     childC4BtnClose.setAttribute('data-bs-toggle', 'modal');
     childC4BtnClose.setAttribute('data-bs-target', '#DeleteSiteModal');
-    childC4BtnClose.onclick = () => StorageSiteId(site.id); //Almacena el Id del site al clickarlo
+    childC4BtnClose.onclick = () => localStorage.setItem("idS",site.id) //Almacena el Id del site al clickarlo
     childColumn4.appendChild(childC4BtnClose);
     let childC4BtnAdd = document.createElement("button");
     childC4BtnAdd.type = "button";
@@ -123,26 +123,7 @@ function visualizeCategorySites(categoryId) {
     .then((response) => response.json())
     .then((response) => drawDataSites(response))
     .catch((err) => console.error(err));
-}
-
-//ELIMINAR ESTE COMENTARIO, NO SIRVE
-//Función que añade una categoría
-/* function AddCategory() {
-  //Crear modalCategoria
-  document.getElementById("modalCategoria").style.display = block;
-  /*
-   *Comprobar que el nombre de la categoria introducido en el
-   *input text no esté repetido en los ya creados.
-   *Show mensaje de error de que no hay 2 nombres de categorías iguales.
-   *Ok añadir datos y cerrar el modal.
-   *Cancel cerrar el modal.
-   */
-  //HASTA AQUÍ
-
-function StorageSiteId(siteId){
-  localStorage.setItem("idS",siteId);
-}
-  
+}  
 
 function DeleteSite(){
   //1- Recoger el Id del site
@@ -158,10 +139,6 @@ function DeleteSite(){
   
   //Visualizar los sites actualizados
   location.reload();
-}
-
-function StorageCategoryId(categoryId){
-  localStorage.setItem("idC", categoryId);
 }
 
 function DeleteCategory() {
