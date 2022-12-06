@@ -139,10 +139,10 @@ function visualizeCategorySites(categoryId) {
    */
   //HASTA AQUÍ
 
-
 function StorageSiteId(siteId){
   localStorage.setItem("idS",siteId);
 }
+  
 
 function DeleteSite(){
   //1- Recoger el Id del site
@@ -157,7 +157,7 @@ function DeleteSite(){
      .catch(err => console.error(err));
   
   //Visualizar los sites actualizados
-  /* location.reload(); */
+  location.reload();
 }
 
 function StorageCategoryId(categoryId){
