@@ -1,5 +1,4 @@
 function generatePassword() {
-  // Genera una contraseña aleatoria de 9 caracteres
   let password = "";
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
@@ -7,13 +6,13 @@ function generatePassword() {
   for (let i = 0; i < 10; i++) {
     password += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
-  var field = document.getElementById("inputPassword");
+  let field = document.getElementById("inputPassword");
   field.value = password;
 }
 
 function hidePassword() {
-  var x = document.getElementById("inputPassword");
-  var eye = document.getElementById("showPassword");
+  let x = document.getElementById("inputPassword");
+  let eye = document.getElementById("showPassword");
   if (x.type === "password") {
     x.type = "text";
     eye.innerHTML =
@@ -70,11 +69,9 @@ async function onSubmit() {
     headers: {
       "Content-Type": "application/json",
     },
-    mode: "no-cors",
     method: "POST",
     body: JSON.stringify(body),
   };
-
   fetch(`http://localhost:3000/categories/${id}`, options)
     .then((response) => {
       if (response.ok) {
