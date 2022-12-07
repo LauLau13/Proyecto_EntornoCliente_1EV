@@ -121,14 +121,14 @@ function AddCategory() {
   //let crearCateg = document.getElementById("modalCategoria").style.display = block;
   //http://localhost:3000/categories --> muestra los datos que existen en la col de categorias
   //Añadir categoria pones el nombre y se autogenera un ID
-  let nombre = document.getElementById("inputCategoria").value
-  const options = {method: 'POST', body:`{"name":${nombre}}`};
-  debugger
+  let nombre = document.getElementById("inputCategoria").value;
+  const options = { method: "POST", body: `{"name":${nombre}}` };
 
-  fetch('http://localhost:3000/categories', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
+  fetch("http://localhost:3000/categories", options)
+    .then((response) => response.json())
+    .then((response) => console.log(response))
+    .finally(() => location.reload())
+    .catch((err) => console.error(err));
   /*
    *Comprobar que el nombre de la categoria introducido en el
    *input text no esté repetido en los ya creados.
