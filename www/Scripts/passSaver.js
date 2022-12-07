@@ -80,7 +80,8 @@ async function onSubmit() {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error("Something went wrong");
+        alert(`Error`);
+        console.error(response);
       }
     })
     .then((response) => console.log(response))
