@@ -47,9 +47,16 @@ let drawDataCategories = (dataCategories) => {
     childC2BtnDeleteC.type = "button";
     childC2BtnDeleteC.classList = "btn-outline-light border-0 bg-white";
     childC2BtnDeleteC.innerHTML = btnDelete;
+    childC2BtnDeleteC.setAttribute('data-bs-toggle', 'modal')
+    childC2BtnDeleteC.setAttribute('data-bs-target', '#DeleteCategoryModal')
+    childC2BtnDeleteC.onclick = () => localStorage.setItem("idC",category.id); //Almacena el Id de la category al clickarlo
     childColumn2.appendChild(childC2BtnDeleteC);
   });
 };
+
+fetch("http://localhost:3000/categories")
+  .then((response) => response.json())
+  .then((dataCategories) => drawDataCategories(dataCategories));
 
 //Visualizar todos los sites
 let drawDataSites = (dataSites) => {
@@ -92,6 +99,9 @@ let drawDataSites = (dataSites) => {
     childC4BtnClose.type = "button";
     childC4BtnClose.classList = "btn-outline-light border-0 bg-white";
     childC4BtnClose.innerHTML = btnDelete;
+    childC4BtnClose.setAttribute('data-bs-toggle', 'modal');
+    childC4BtnClose.setAttribute('data-bs-target', '#DeleteSiteModal');
+    childC4BtnClose.onclick = () => localStorage.setItem("idS",site.id) //Almacena el Id del site al clickarlo
     childColumn4.appendChild(childC4BtnClose);
     let childC4BtnAdd = document.createElement("button");
     childC4BtnAdd.type = "button";
@@ -113,21 +123,48 @@ function visualizeCategorySites(categoryId) {
     .then((response) => response.json())
     .then((response) => drawDataSites(response))
     .catch((err) => console.error(err));
-}
+}  
 
-//Función que añade una categoría
-function AddCategory() {
-  //Crear modalCategoria
-  document.getElementById("modalCategoria").style.display = block;
-  /*
-   *Comprobar que el nombre de la categoria introducido en el
-   *input text no esté repetido en los ya creados.
-   *Show mensaje de error de que no hay 2 nombres de categorías iguales.
-   *Ok añadir datos y cerrar el modal.
-   *Cancel cerrar el modal.
-   */
+function DeleteSite(){
+  //1- Recoger el Id del site
+  let id = localStorage.getItem("idS")
+
+  //2- Llamada a la API para eliminar el site
+   const options = {method: 'DELETE'};
+
+   fetch(`http://localhost:3000/sites/${id}`, options)
+     .then(response => response.json())
+     .then(response => console.log(response))
+     .catch(err => console.error(err));
+  
+  //Visualizar los sites actualizados
+  location.reload();
 }
 
 function DeleteCategory() {
-  //Onclick botón X categoría
+  //1- Recoger el Id del site
+  let id = localStorage.getItem("idC")
+
+  //2- Borrar los sites de la category
+  const option1 = {method: 'GET'};
+
+  fetch(`http://localhost:3000/categories/${id}`, option1)
+    .then((response) => response.json())
+    .then((response) => (response).forEach((site) => {
+      DeleteSite();
+      })
+    )
+    .catch(err => console.error(err));
+    
+
+  //3- Llamada a la API para eliminar la categoría
+  const option2 = {method: 'DELETE'};
+
+  fetch(`http://localhost:3000/categories/${id}`, option2)
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.error(err));
+  
+  //Visualizar los sites actualizados
+  location.reload();
 }
