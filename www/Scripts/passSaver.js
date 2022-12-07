@@ -82,6 +82,6 @@ async function onSubmit() {
       }
     })
     .then((response) => console.log(response))
+    .finally(() => location.reload())
     .catch((err) => console.error(err));
-  location.reload();
 }
