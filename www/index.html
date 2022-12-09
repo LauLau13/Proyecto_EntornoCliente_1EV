@@ -18,7 +18,7 @@
     ></script>
     <link rel="stylesheet" href="styles/passSaverStyle.css" />
     <script src="./Scripts/passSaver.js"></script>
-    <script src="./scripts/home.js"></script>
+    <script src="./Scripts/home.js"></script>
   </head>
   <body>
     <div class="Page1 container border border-dark-3 mt-4 p-0 w-auto h-auto">
@@ -30,7 +30,7 @@
         ></button>
       </div>
       <hr class="border border-1 p-0 m-1" />
-      <!-- Opciones Add Categoria | Site -->
+      <!-- Opciones Add Categoria -->
       <div class="btn-group m-2 mt-2 mb-0">
         <button
           type="button"
@@ -38,7 +38,6 @@
           class="btn btn-outline-primary"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
-          onclick="AddCategory()"
         >
           Add category
         </button>
@@ -90,11 +89,19 @@
         </div>
       </div>
       <!--Modal | PopUp Nueva categoria-->
-      <div class="modal" tabindex="-1">
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Nueva categoría</h5>
+              <h1 class="modal-title fs-5" id="exampleModal">
+                Añade una categoría
+              </h1>
               <button
                 type="button"
                 class="btn-close"
@@ -103,16 +110,12 @@
               ></button>
             </div>
             <div class="modal-body">
-              <p>Nombre</p>
-              <div class="input-group mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Nuevo nombre"
-                  aria-label="Nuevo nombre"
-                  aria-describedby="basic-addon1"
-                />
-              </div>
+              <p>Nueva categoría</p>
+              <input
+                type="text"
+                placeholder="escribe la categoria"
+                id="inputCategoria"
+              />
             </div>
             <div class="modal-footer">
               <button
@@ -122,7 +125,13 @@
               >
                 Cancelar
               </button>
-              <button type="button" class="btn btn-primary">Guardar</button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="AddCategory()"
+              >
+                Guardar
+              </button>
             </div>
           </div>
         </div>
