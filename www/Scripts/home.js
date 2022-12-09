@@ -114,7 +114,7 @@ let drawDataSites = (dataSites) => {
 //Función que visualiza los sites de una categoría
 function visualizeCategorySites(categoryId) {
   let parent = document.getElementById('sitesTable');
-
+  localStorage.setItem('idC', categoryId);
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
@@ -132,10 +132,22 @@ function AddCategory() {
   //http://localhost:3000/categories --> muestra los datos que existen en la col de categorias
   //Añadir categoria pones el nombre y se autogenera un ID
   let nombre = document.getElementById('inputCategoria').value;
-  const options = { method: 'POST', body: `{"name":${nombre}}` };
+  let body = {
+    name: nombre,
+  };
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(body),
+  };
 
   fetch('http://localhost:3000/categories', options)
-    .then((response) => response.json())
+    .then((response) => {
+      debugger;
+      response.json();
+    })
     .then((response) => console.log(response))
     .finally(() => location.reload())
     .catch((err) => console.error(err));
